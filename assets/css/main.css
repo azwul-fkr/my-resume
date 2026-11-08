@@ -1,0 +1,178 @@
+/* ==============================================================================
+   DESIGN TOKENS & TYPOGRAPHY - EGI AZWUL FIKRI PORTFOLIO
+   Refactored strictly to match the architectural editorial design reference.
+   ============================================================================== */
+
+:root {
+  /* --------------------------------------------------------------------------
+     PALET WARNA REFERENSI (ARCHITECTURAL MINIMALIST LIGHT PALETTE)
+     Sumber kebenaran: Desain Referensi Portfolio
+     -------------------------------------------------------------------------- */
+  --color-background: #fbfbfa;          /* Latar belakang kanvas utama (warm architectural white) */
+  --color-background-alt: #f4f4f2;      /* Latar selang-seling section / banner */
+  --color-surface: #ffffff;             /* Latar kartu & viewport */
+  --color-surface-hover: #f8fafc;
+  
+  /* Tipografi Warna */
+  --color-text-primary: #0f172a;        /* Teks judul & teks utama (deep obsidian) */
+  --color-text-secondary: #475569;      /* Teks paragraf & deskripsi (neutral slate) */
+  --color-text-muted: #64748b;          /* Metadata, label, & caption */
+  --color-text-dim: #94a3b8;            /* Teks redup & penanda indeks */
+  
+  /* Garis & Border */
+  --color-border-subtle: #e5e7eb;       /* Border hairline tipis */
+  --color-border-medium: #cbd5e1;       /* Border kartu & input */
+  --color-border-dark: #0f172a;         /* Border penegas aktif */
+  
+  /* Tombol & Aksen */
+  --color-button-primary-bg: #0f172a;   /* Tombol primer hitam solid */
+  --color-button-primary-text: #ffffff;
+  --color-button-primary-hover: #1e293b;
+  --color-accent: #2563eb;              /* Aksen fungsional (link aktif & focus) */
+  --color-accent-subtle: #eff6ff;
+  --color-success: #059669;             /* Status ketersediaan kerja */
+  
+  /* Tipografi */
+  --font-sans: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', SFMono-Regular, Consolas, monospace;
+  
+  /* Layout & Spacing */
+  --content-max-width: 1280px;          /* Batas lebar konten pada layar besar (1920px+) */
+  --page-gutter: clamp(1.25rem, 4vw, 3rem);
+  --section-spacing: clamp(4.5rem, 8vw, 7.5rem);
+  
+  /* Radius & Transisi */
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
+  --radius-full: 9999px;
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  --shadow-subtle: 0 1px 3px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 0, 0, 0.03);
+  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+/* --------------------------------------------------------------------------
+   CSS Reset & Base Setup
+   -------------------------------------------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--color-background);
+  color: var(--color-text-secondary);
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-background);
+  color: var(--color-text-secondary);
+  line-height: 1.65;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--transition-fast), border-color var(--transition-fast);
+}
+
+ul, ol {
+  list-style: none;
+}
+
+/* --------------------------------------------------------------------------
+   Tipografi Arsitektural & Hierarki Teks
+   -------------------------------------------------------------------------- */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--color-text-primary);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+}
+
+p {
+  color: var(--color-text-secondary);
+  line-height: 1.65;
+}
+
+.mono-tag {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.section-label {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  margin-bottom: 0.65rem;
+}
+
+.section-heading {
+  font-size: clamp(2rem, 3.8vw, 3rem);
+  font-weight: 800;
+  color: var(--color-text-primary);
+  letter-spacing: -0.03em;
+  margin-bottom: 0.85rem;
+}
+
+.section-lead {
+  font-size: clamp(1rem, 1.2vw, 1.12rem);
+  color: var(--color-text-secondary);
+  max-width: 68ch;
+  line-height: 1.65;
+}
+
+::selection {
+  background-color: var(--color-text-primary);
+  color: #ffffff;
+}
+
+/* --------------------------------------------------------------------------
+   Scroll Reveal & Text Fade-In/Out Animations (Hardware-Accelerated)
+   Ringan, tidak membebani browser, beroperasi murni pada GPU Compositor.
+   -------------------------------------------------------------------------- */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.scroll-reveal.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-portrait-card {
+    animation: none !important;
+  }
+  .scroll-reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
